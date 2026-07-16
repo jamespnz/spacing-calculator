@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Equal Spacing & Baluster Calculator | Studio Terminal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap');
+        body { font-family: 'JetBrains Mono', monospace; }
+        .ad-placeholder { min-height: 90px; background: repeating-linear-gradient(45deg, #1e293b, #1e293b 10px, #0f172a 10px, #0f172a 20px); }
+        /* Hide number input spinners for a cleaner industrial readout */
+        input[type=number]::-webkit-inner-spin-button,
+        input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+        input[type=number] { -moz-appearance: textfield; }
+    </style>
+    <!-- Programmatic SEO Structured Data Engine -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Carpentry Equal Spacing & Baluster Calculator",
+      "operatingSystem": "All",
+      "applicationCategory": "BusinessApplication",
+      "browserRequirements": "Requires JavaScript. Requires HTML5.",
+      "offers": {
+        "@type": "Offer",
+        "price": "0.00",
+        "priceCurrency": "USD"
+      },
+      "featureList": "Even spacing layout calculation, dynamic visual preview canvas, dual marking-mode array arrays."
+    }
+    </script>
+</head>
+<body class="bg-slate-950 text-slate-200 min-h-screen flex flex-col justify-between selection:bg-amber-500 selection:text-slate-950">
+
+    <!-- TOP ADVERTISING FIXED BOX CONTAINER -->
+    <div class="w-full border-b border-slate-800 bg-slate-900/50 p-2">
+        <div class="max-w-4xl mx-auto">
+            <div class="ad-placeholder w-full flex items-center justify-between px-4 border border-slate-700/50 text-xs tracking-widest text-slate-500">
+                <span>[ADSENSE_TOP_LEADERBOARD_FIXED_CONTAINER_90PX_HEIGHT]</span>
+                <span class="text-[9px] border border-slate-700 px-1 rounded">ADVERTISEMENT</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- MAIN TERMINAL COMMAND CENTER -->
+    <main class="flex-grow max-w-4xl w-full mx-auto p-4 md:p-6 space-y-6">
+
+        <!-- TERMINAL HEADER ARCHITECTURE -->
+        <header class="border border-slate-800 bg-slate-900 p-4 rounded flex flex-col md:flex-row justify-between items-start md:items-center gap-2">
+            <div>
+                <h1 class="text-xl font-bold tracking-tight text-amber-400">SYS::SPACING-CALCULATOR//V1.0</h1>
+                <p class="text-xs text-slate-400 mt-1">Deterministic Equal Spacing Grid Engine. No tracking. Client-side execution loop.</p>
+            </div>
+            <div class="text-right text-[11px] text-slate-500 space-y-0.5">
+                <div>LOC: SYSTEM_BROWSER_MEMORY</div>
+                <div>STATE: COMPLIANT_1.50_SIGMA</div>
+            </div>
+        </header>
+
+        <!-- GRID INTERFACE CONTROLS -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+            <!-- INPUT MANAGEMENT ENGINE (FORM ELEMENT) -->
+            <form id="calculator-form" class="md:col-span-1 border border-slate-800 bg-slate-900 p-4 rounded space-y-4" onsubmit="event.preventDefault();">
+                <div class="text-xs font-bold uppercase tracking-wider text-amber-500 border-b border-slate-800 pb-2">Operational Inputs</div>
+
+                <div class="space-y-1">
+                    <label class="block text-[11px] uppercase tracking-wider text-slate-400" for="total-length">Total Run Length (inches)</label>
+                    <input type="number" step="0.001" id="total-length" value="96" class="w-full bg-slate-950 border border-slate-800 rounded px-2 py-1.5 text-sm text-amber-400 focus:outline-none focus:border-amber-500 transition-colors">
+                </div>
+
+                <div class="space-y-1">
+                    <label class="block text-[11px] uppercase tracking-wider text-slate-400" for="object-width">Baluster/Object Width (inches)</label>
+                    <input type="number" step="0.001" id="object-width" value="1.5" class="w-full bg-slate-950 border border-slate-800 rounded px-2 py-1.5 text-sm text-amber-400 focus:outline-none focus:border-amber-500 transition-colors">
+                </div>
+
+                <div class="space-y-1">
+                    <label class="block text-[11px] uppercase tracking-wider text-slate-400" for="object-count">Target Segment Count</label>
+                    <input type="number" step="1" id="object-count" value="15" class="w-full bg-slate-950 border border-slate-800 rounded px-2 py-1.5 text-sm text-amber-400 focus:outline-none focus:border-amber-500 transition-colors">
+                </div>
+
+                <div class="space-y-1">
+                    <label class="block text-[11px] uppercase tracking-wider text-slate-400" for="marking-mode">Marking Edge Logic</label>
+                    <select id="marking-mode" class="w-full bg-slate-950 border border-slate-800 rounded px-2 py-1.5 text-sm text-amber-400 focus:outline-none focus:border-amber-500 transition-colors">
+                        <option value="gap">On-Center Layout</option>
+                        <option value="edge">Continuous Edge-to-Edge</option>
+                    </select>
+                </div>
+            </form>
+
+            <!-- OUTPUT VISUALIZATION MATRIX -->
+            <div class="md:col-span-2 space-y-4 flex flex-col justify-between">
+
+                <!-- DYNAMIC PREVIEW DATA RUN CANVAS LAYER -->
+                <div class="border border-slate-800 bg-slate-900 p-4 rounded flex-grow flex flex-col justify-between space-y-4">
+                    <div class="text-xs font-bold uppercase tracking-wider text-amber-500 border-b border-slate-800 pb-2">Dynamic Canvas Run Preview</div>
+
+                    <div class="w-full bg-slate-950 border border-slate-800 rounded p-4 flex items-center justify-center min-h-[100px]">
+                        <div id="visual-track" class="w-full h-8 bg-slate-900 border border-slate-800 rounded relative overflow-hidden flex items-center">
+                            <!-- Injected elements generate deterministically here -->
+                        </div>
+                    </div>
+
+                    <!-- RUNTIME FIELD ARRAYS READOUT -->
+                    <div class="grid grid-cols-2 gap-2 bg-slate-950 border border-slate-800 p-3 rounded text-xs">
+                        <div>
+                            <span class="text-slate-500 uppercase block tracking-wider">Calculated Gap Width:</span>
+                            <span id="calculated-gap" class="text-base font-bold text-amber-400">0.000 in</span>
+                        </div>
+                        <div>
+                            <span class="text-slate-500 uppercase block tracking-wider">Total Objects Injected:</span>
+                            <span id="calculated-count" class="text-base font-bold text-amber-400">0</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- HIGH DATA DENSITY LEDGER / ARRAYS TABLE STRUCTURE -->
+        <div class="border border-slate-800 bg-slate-900 p-4 rounded">
+            <div class="text-xs font-bold uppercase tracking-wider text-amber-500 border-b border-slate-800 pb-2 mb-3">Incremental Tape Marking Array Ledger</div>
+            <div class="max-h-48 overflow-y-auto border border-slate-800 rounded bg-slate-950">
+                <table class="w-full text-left text-xs text-mono">
+                    <thead class="bg-slate-900/80 sticky top-0 border-b border-slate-800 text-slate-400">
+                        <tr>
+                            <th class="p-2 uppercase tracking-wider">Object Index</th>
+                            <th class="p-2 uppercase tracking-wider">Left Marking Edge</th>
+                            <th class="p-2 uppercase tracking-wider">Center Sequence Position</th>
+                            <th class="p-2 uppercase tracking-wider">Right Marking Edge</th>
+                        </tr>
+                    </thead>
+                    <tbody id="ledger-rows" class="divide-y divide-slate-900 text-slate-300">
+                        <!-- Injected array sequences -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- MIDDLE PAGE NATIVE ADVERTISING CONTAINER MATRIX -->
+        <div class="ad-placeholder w-full flex items-center justify-between px-4 border border-slate-800 rounded text-xs tracking-widest text-slate-500">
+            <span>[ADSENSE_MID_CONTENT_RESPONSIVE_DISPLAY_BOX]</span>
+            <span class="text-[9px] border border-slate-700 px-1 rounded">ADVERTISEMENT</span>
+        </div>
+
+        <!-- CONTEXTUAL HIGH-VALUE INFORMATION ECOSYSTEM SECTION (PREVENTS THIN CONTENT REDUCTIONS) -->
+        <section class="border border-slate-800 bg-slate-900 p-6 rounded space-y-4 text-xs md:text-sm text-slate-300 leading-relaxed">
+            <h2 class="text-amber-400 text-base font-bold uppercase tracking-wider border-b border-slate-800 pb-2">Carpentry Spacing Fundamentals & Functional Logic</h2>
+            <p>
+                Achieving a professional finish on deck railings, stair balusters, open shelving, and structural fence layouts requires distributing layout units evenly across a fixed distance framework. Manual calculation methods frequently leave designers with a small discrepancy error on the final segment of the run, requiring constant tracking adjustments and recalculations.
+            </p>
+            <h3 class="text-amber-500 font-bold uppercase tracking-wide mt-2">The Underlying Mathematical Formula</h3>
+            <p>
+                Our computational spacing engine completely avoids mathematical guessing. It processes your input values using a rigid algebraic layout equation to isolate the target gap size across every single segment partition:
+            </p>
+            <div class="bg-slate-950 border border-slate-800 p-3 rounded font-mono text-center text-amber-400 text-xs md:text-sm my-2">
+                Gap Size = (Total Run Length - (Target Object Count &times; Object Width)) / (Target Object Count + 1)
+            </div>
+            <p>
+                By determining the absolute value of the gap down to three decimal precision frames, the system maps continuous coordinate intervals along your measuring tape array ledger, ensuring that cumulative tracking errors are zeroed out systematically across long-distance installation horizons.
+            </p>
+            <h3 class="text-amber-500 font-bold uppercase tracking-wide mt-2">How to Use the Tape Marking Array Ledger</h3>
+            <p>
+                To utilize the data readout output table efficiently on a structural work site: secure your tape measure tracking clip firmly onto the absolute starting point boundary of your run layout. Do not move or adjust the physical housing container of the tool mid-operation. Read down the table matrix, adding markings directly at the designated incremental sequence values listed inside the <strong class="text-amber-400">Left Marking Edge</strong> or <strong class="text-amber-400">Right Marking Edge</strong> columns based on your project configuration parameters.
+            </p>
+            <p>
+                For on-center layout mode, the gap is computed as the distance between the surface of adjacent objects and the run boundaries, producing evenly distributed spacing fields. In continuous edge-to-edge mode, the system treats the run as a single uninterrupted track where each object footprint is placed sequentially after the calculated gap, giving you a precise coordinate map for marking tape positions without cumulative drift. Both modes share the same algebraic core: the total run length is reduced by the aggregate footprint of all objects, and the remainder is partitioned into equal segments so that every gap — including the lead-in and tail-out — is identical to three decimal places.
+            </p>
+            <p>
+                Field tolerance matters. When working with dimensional lumber, kiln-dried balusters, or metal tubing, nominal widths often differ from actual widths by up to a sixteenth of an inch or more. Always measure the actual stock you intend to install and enter that real dimension into the calculator rather than the nominal label. The three-decimal output is designed to surface that level of precision so a fabricator can confidently transfer marks to a tape measure, story pole, or jig without introducing compounding error across a long run of dozens of pickets or spindles.
+            </p>
+            <p>
+                Common applications include residential deck guardrails where building codes typically mandate that the clear opening between balusters not exceed four inches, stair stringer layouts where tread rise and run must remain uniform, shelf pin arrays in cabinetry, fence picket distribution across a property line, and tile or panel layout where grout lines and reveal edges must stay consistent. In each of these cases the same equal-spacing equation applies: subtract the total occupied width of all units from the overall run, then divide the remaining distance by the number of gaps that must fit within that run.
+            </p>
+        </section>
+
+        <!-- STANDARDIZED GOOGLE COMPLIANT PRIVACY PROVISION ECOSYSTEM -->
+        <section id="privacy-provision" class="border border-slate-800 bg-slate-900/40 p-4 rounded text-[11px] text-slate-500 space-y-2 leading-relaxed">
+            <div class="font-bold uppercase tracking-wider text-slate-400 border-b border-slate-800 pb-1">Privacy & Data Governance Disclosure</div>
+            <p>
+                This single-purpose utility app functions exclusively under native client-side computing parameters. No telemetry tracking blocks, form input ingestion loops, or remote database synchronization tasks occur within this application codebase architecture. Your input dimensions process strictly in local browser application memory, ensuring absolute identity safety and zero data leakage vectors.
+            </p>
+            <p>
+                <strong>Third-Party Vendor Disclosures:</strong> This platform utilizes Google AdSense and Google Ad Manager network tags to serve programmatic display ad campaigns to visitors. Google uses cookie sequences to serve tailored marketing configurations based on historical navigation loops across global web environments. Users can update or disable personalized advertising profiles at any time by configuring their primary browser privacy tracking settings or accessing official Google Ad Preference verification accounts directly.
+            </p>
+        </section>
+
+    </main>
+
+    <!-- FOOTER SYSTEM STATUS LAYER -->
+    <footer class="w-full border-t border-slate-900 bg-slate-950 p-4 text-center text-[11px] text-slate-600 tracking-wider">
+        <div class="max-w-4xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2">
+            <div>&copy; 2026 HEADSUP APP DESIGN STUDIO // ALL RIGHTS RESERVED.</div>
+            <div class="flex gap-4">
+                <a href="#privacy-provision" class="hover:text-slate-400 transition-colors underline">PRIVACY POLICY</a>
+                <span class="text-slate-800">|</span>
+                <span class="text-amber-600 font-bold">STATE 1 COMPLIANT</span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- STABLE CLIENT-SIDE DETERMINISTIC LOGIC SCRIPT ENGINE -->
+    <script>
+        (function() {
+            "use strict";
+
+            // TARGET INTERFACE CACHE REGISTRY
+            const totalLengthInput = document.getElementById('total-length');
+            const objectWidthInput = document.getElementById('object-width');
+            const objectCountInput = document.getElementById('object-count');
+            const markingModeSelect = document.getElementById('marking-mode');
+
+            const calculatedGapDisplay = document.getElementById('calculated-gap');
+            const calculatedCountDisplay = document.getElementById('calculated-count');
+            const visualTrackContainer = document.getElementById('visual-track');
+            const ledgerRowsContainer = document.getElementById('ledger-rows');
+
+            /**
+             * EXECUTES PURE MATHEMATICAL SPACING OPERATIONS AND DOM INJECTIONS
+             * CONSTRAINS ASSUMPTIONS, ENSURES RUNS ARE SAFE BY DESIGN
+             */
+            function executeCalculationLoop() {
+                // ASSIGNED COMPONENT VALUE INGESTION & PARSING
+                const totalLength = parseFloat(totalLengthInput.value) || 0;
+                const objectWidth = parseFloat(objectWidthInput.value) || 0;
+                const objectCount = parseInt(objectCountInput.value, 10) || 0;
+                const markingMode = markingModeSelect.value;
+
+                // Reset error styling before re-evaluation
+                calculatedGapDisplay.classList.remove('text-red-400');
+                calculatedGapDisplay.classList.add('text-amber-400');
+
+                // EDGE CONSTRAINT VALIDATION GATES
+                if (totalLength <= 0 || objectCount <= 0 || objectWidth < 0) {
+                    calculatedGapDisplay.textContent = "0.000 in";
+                    calculatedCountDisplay.textContent = "0";
+                    visualTrackContainer.innerHTML = '';
+                    ledgerRowsContainer.innerHTML = '<tr><td colspan="4" class="p-2 text-center text-slate-600">Awaiting operational baseline metrics...</td></tr>';
+                    return;
+                }
+
+                // ARITHMETIC TRACK MATRIX ISOLATION
+                const netObjectWidthAccumulation = objectCount * objectWidth;
+                const remnantRunLength = totalLength - netObjectWidthAccumulation;
+
+                // PREVENT SYSTEM DEVIATION ON NEGATIVE BOUNDS
+                if (remnantRunLength < 0) {
+                    calculatedGapDisplay.textContent = "ERR: SPACE EXCEEDED";
+                    calculatedGapDisplay.classList.remove('text-amber-400');
+                    calculatedGapDisplay.classList.add('text-red-400');
+                    calculatedCountDisplay.textContent = objectCount.toString();
+                    visualTrackContainer.innerHTML = '<div class="w-full text-center text-[10px] text-red-400 font-bold tracking-widest select-none">ERR: SPACE EXCEEDED</div>';
+                    ledgerRowsContainer.innerHTML = '<tr><td colspan="4" class="p-2 text-center text-red-400">ERR: SPACE EXCEEDED — total object width exceeds run length</td></tr>';
+                    return;
+                }
+
+                const singleGapSize = remnantRunLength / (objectCount + 1);
+
+                // UPDATE BASIC REVENUE READOUT FIELDS
+                calculatedGapDisplay.textContent = singleGapSize.toFixed(3) + " in";
+                calculatedCountDisplay.textContent = objectCount.toString();
+
+                // CLEAR VISUAL CANVAS VIEWS PRIOR TO RE-INJECTION (IDEMPOTENT RESET)
+                visualTrackContainer.innerHTML = '';
+                ledgerRowsContainer.innerHTML = '';
+
+                let currentPositionTracker = 0;
+
+                // INGEST LOOP FOR ARRAYS MATRIX CONSTRUCTION
+                for (let i = 1; i <= objectCount; i++) {
+                    // Advance position frame over preceding gap space boundary
+                    currentPositionTracker += singleGapSize;
+
+                    const objectLeftEdge = currentPositionTracker;
+                    const objectCenterPoint = currentPositionTracker + (objectWidth / 2);
+                    const objectRightEdge = currentPositionTracker + objectWidth;
+
+                    // CONSTRUCT RELATIONAL LEDGER DATA ROW STRINGS
+                    const tableRow = document.createElement('tr');
+                    tableRow.className = "hover:bg-slate-900/40 border-b border-slate-900 transition-colors";
+                    tableRow.innerHTML = `
+                        <td class="p-2 font-bold text-amber-500">#${i.toString().padStart(2, '0')}</td>
+                        <td class="p-2 font-mono">${objectLeftEdge.toFixed(3)} in</td>
+                        <td class="p-2 font-mono text-slate-400">${objectCenterPoint.toFixed(3)} in</td>
+                        <td class="p-2 font-mono">${objectRightEdge.toFixed(3)} in</td>
+                    `;
+                    ledgerRowsContainer.appendChild(tableRow);
+
+                    // CONSTRUCT RESPONSIVE DYNAMIC VISUAL ELEMENT OVERLAYS
+                    const leftPercentPosition = (objectLeftEdge / totalLength) * 100;
+                    const widthPercentScale = (objectWidth / totalLength) * 100;
+
+                    const visualBlock = document.createElement('div');
+                    visualBlock.className = "absolute h-full bg-amber-500/20 border-x border-amber-400 flex items-center justify-center text-[9px] font-bold text-amber-400 select-none transition-all";
+                    visualBlock.style.left = `${leftPercentPosition}%`;
+                    visualBlock.style.width = `${widthPercentScale}%`;
+                    visualBlock.textContent = i.toString();
+
+                    visualTrackContainer.appendChild(visualBlock);
+
+                    // Advance position frame across width of injected object footprint
+                    currentPositionTracker += objectWidth;
+                }
+            }
+
+            // ASSIGN EVENT LISTENERS ACCROSS INPUT ARRAY MATRIX
+            [totalLengthInput, objectWidthInput, objectCountInput, markingModeSelect].forEach(element => {
+                element.addEventListener('input', executeCalculationLoop);
+            });
+
+            // INITIALIZE RUNTIME STATEFUL CAPTURE ON FRAME LOAD
+            executeCalculationLoop();
+        })();
+    </script>
+</body>
+</html>

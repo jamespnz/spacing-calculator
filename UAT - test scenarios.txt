@@ -1,0 +1,44 @@
+To run a comprehensive validation test on your calculation engine, here are three realistic field scenarios designed to stress-test the boundary conditions, fractional precision, and layout logic.
+
+---
+
+## Test Scenario 1: Standard Residential Deck Railing (Code Compliance Run)
+
+*This scenario replicates a standard building code test, ensuring clear openings between balusters stay uniform and narrow enough to meet structural safety regulations.*
+
+* **Total Run Length:** `96.00` inches (An exact 8-foot section layout)
+* **Baluster/Object Width:** `1.50` inches (Standard dimensional $2\times2$ wood baluster actual footprint)
+* **Target Segment Count:** `15`
+* **Expected Behavior:** This will calculate the necessary intervals to keep your spacing fields uniform across a standard horizontal run layout.
+
+---
+
+## Test Scenario 2: High-Density Precision Balusters (Fractional Baseline Test)
+
+*This setup uses non-standard dimensions to test how perfectly the engine balances small, high-frequency fractional calculations across a tight span without rounding errors.*
+
+* **Total Run Length:** `48.75` inches
+* **Baluster/Object Width:** `0.75` inches (Slim profile metal square spindles)
+* **Target Segment Count:** `9`
+* **Expected Behavior:** The ledger array should calculate clean decimal coordinates down to three fixed markers, ensuring the final tail-out segment mirrors the lead-in segment exactly.
+
+---
+
+## Test Scenario 3: Large Span Structural Layout (Stud/Rafter Simulation)
+
+*This tests the engine’s performance over a long installation horizon, verifying that cumulative tracking variations are zeroed out completely over a large array ledger.*
+
+* **Total Run Length:** `180.00` inches (An exact 15-foot structural span)
+* **Baluster/Object Width:** `3.50` inches (Actual width of a standard $2\times4$ structural stud framing face)
+* **Target Segment Count:** `10`
+* **Expected Behavior:** The incremental tape marking values will scale up dramatically, providing an ideal scenario to check your continuous coordinate matrix for tracking drift across a long distance.
+
+---
+
+### Execution Protocol
+
+Secure your physical or virtual testing parameters, enter these exact inputs into your operational fields, and verify that the calculated outputs distribute evenly down to the millimeter without single-unit layout drift.
+
+---
+
+**Project Management Task:** Initiate the User Acceptance Testing (UAT) work package for the M1 Spacing Calculator, deploying structured test scenario baselines to validate the functional integrity of the mathematical engine under simulated field metrics. Language Style: PMI PMBOK Guide 7th Edition.
