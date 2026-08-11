@@ -1,0 +1,71 @@
+### SPECIFICATION FREEZE NOTICE
+
+**PROJECT:** HeadsUp ADS Micro-Utility Line
+
+**ASSET TARGET:** Spacing-Calculator (Deterministic Equal Spacing Grid Engine)
+
+**DOCUMENT ID:** HU-ADS-2026-SRS-FRZ-001
+
+**RELEASE PHASE:** Phase 3 Technical Design Baseline
+
+**COMPLIANCE STATUS:** STATE 1 PROTOCOL ENFORCED
+
+**METHODOLOGY BASELINE:** PMI PMBOK Guide 7th Edition Style Standards
+
+---
+
+### 1. OFFICIAL DECLARATION OF ARCHITECTURAL FREEZE
+
+Pursuant to the HeadsUp Consulting App Design Studio (ADS) digital governance framework, this document formalizes the final specification freeze for the `spacing-calculator` application node.
+
+To prevent scope creep, "vibe coding," and unchecked agentic iteration loops during the bolt.new generation phase, the functional architecture, mathematical boundaries, and design tokens detailed below are locked down as immutable. Any deviation from this baseline requires an authorized configuration revision request.
+
+---
+
+### 2. CORE SPECIFICATIONS & MATH ENGINE BOUNDARIES
+
+#### 2.1 Mathematical Formulation (Deterministic Logic)
+
+The core calculation loop is restricted to a rigid client-side algebraic matrix. The engine must compute absolute placement values down to three decimal precision frames to ensure a zero cumulative layout drift across long-distance horizons:
+
+$$Gap\ Size = \frac{Total\ Run\ Length - (Target\ Object\ Count \times Object\ Width)}{Target\ Object\ Count + 1}$$
+
+#### 2.2 Discrete State Execution Rules (State 1 Protocol)
+
+In compliance with the studio's architectural mandates, the software must be structured as a stateful, predictable system:
+
+* **Explicit Parameters:** Input dimensions, timestamps, object identity parameters, and layout intent states must be explicitly isolated in local browser execution memory. No external telemetry tracking or remote database syncing loops are permitted.
+* **Marker Edge Logic Split:** The user interface must enforce an explicit toggle between:
+1. *Continuous Edge-to-Edge Mode:* Where boundaries partition space uniformly before and after each object face footprint.
+2. *On-Center Layout Mode:* Where spatial centers remain equidistant relative to structural anchoring intervals.
+
+
+
+---
+
+### 3. INTERFACE TOKENS & HIGH-DENSITY VISUAL LAYOUT
+
+The frontend assembly must conform precisely to the "Wall Street Terminal" command center aesthetic layout principles to guarantee high visibility under direct job-site environmental conditions:
+
+* **Color Palette Framework:** Primary dark canvas anchored with high-contrast Slate backgrounds, Silver accents, and explicit Safety Amber high-visibility telemetry indicator text.
+* **Typography:** Strict monospaced font alignment (`font-mono`) to maintain clean tabular readability across data columns.
+* **Output Presentation Layout:** The calculations must immediately map out a row-by-row mathematical ledger tracking:
+`[Object Index]` $\rightarrow$ `[Left Marking Edge Coordinate]` $\rightarrow$ `[Center Sequence Position]` $\rightarrow$ `[Right Marking Edge Coordinate]`.
+* **Structural Ad Containers:** Top and middle content regions must feature structured, high-visibility diagonal hazard-strip frame placeholders reserved explicitly for future Google AdSense tag integration (`[ADSENSE_TOP_LEADERBOARD_FIXED_CONTAINER_90PX_HEIGHT]` and `[ADSENSE_MID_CONTENT_RESPONSIVE_DISPLAY_BOX]`).
+
+---
+
+### 4. DEPLOYMENT & INTEGRATION ROUTE
+
+* **Structural Segregation Isolation:** The utility code is to be compiled as a standalone single-page asset node completely free of the core website's routing overhead. It will reside inside the dedicated production path: `...\1. App Design Studio Products_Live\spacing-calculator`.
+* **Wildcard Linkage Pattern:** Integration into the main HeadsUp Consulting portfolio view (`Portfolio.tsx`) will be accomplished programmatically via an updated product array object element tagged with a strict conditional flag: `isExternal: true`. This pattern ensures clean external execution without bloating internal application files.
+
+---
+
+### 5. SIGN-OFF & EXECUTION DIRECTIVE
+
+This freeze notice serves as the final, binding prompt-blueprint for the generative bolt.new deployment loop. The engineering assistant is directed to output production-ready HTML5/JS/Tailwind scripts that strictly execute this exact architectural state without modification or structural omission.
+
+---
+
+**Project Management Directive:** Log the formal generation and archive of the HU-ADS-2026-SRS-FRZ-001 Configuration Baseline. This action locks down the functional scope registry for the completed Spacing Calculator module, establishing the permanent historical record for compliance audit tracking. Style Guide: PMI PMBOK Guide 7th Edition structural rules.
