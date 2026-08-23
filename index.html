@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Baluster & Spindle Spacing Calculator (Inches & mm) | Equal Gap Tool</title>
-    <meta name="google-site-verification" content="O8D7o-GdMbUb9nse883Q5QtWa0xHZpqZvGmFTe0DeI4" />
-    <meta name="description" content="Free spacing calculator for stair balusters, deck pickets & spindles. Meets the common 4-inch / 100mm sphere-gap guideline — always confirm against your local building code.">
+    <title>Spindle &amp; Baluster Spacing Calculator | Stairs, Decks &amp; Pickets</title>    <meta name="google-site-verification" content="O8D7o-GdMbUb9nse883Q5QtWa0xHZpqZvGmFTe0DeI4" />
+    <meta name="description" content="Free spindle and baluster spacing calculator for stairs, deck railings, and pickets. Calculate equal gaps and meet 4-inch / 100mm building codes easily." />
     
     <!-- Favicon (Inline SVG - Zero HTTP Overhead) -->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📐</text></svg>">
@@ -28,20 +27,43 @@
         input[type=number] { -moz-appearance: textfield; }
     </style>
     <!-- Programmatic SEO Structured Data Engine -->
+    <!-- Unified WebApplication & FAQPage Schema -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "WebApplication",
-      "name": "Carpentry Equal Spacing & Baluster Calculator",
-      "operatingSystem": "All",
-      "applicationCategory": "BusinessApplication",
-      "browserRequirements": "Requires JavaScript. Requires HTML5.",
-      "offers": {
-        "@type": "Offer",
-        "price": "0.00",
-        "priceCurrency": "USD"
-      },
-      "featureList": "Even spacing layout calculation, dynamic visual preview canvas, dual marking-mode array arrays."
+      "@graph": [
+        {
+          "@type": "WebApplication",
+          "name": "Spindle & Baluster Spacing Calculator",
+          "applicationCategory": "BusinessApplication",
+          "operatingSystem": "Any",
+          "browserRequirements": "Requires JavaScript. Requires HTML5.",
+          "description": "Free spindle and baluster spacing calculator for stairs, deck railings, and pickets. Calculate equal gaps and meet 4-inch / 100mm building codes easily.",
+          "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+          "author": { "@type": "Organization", "name": "HeadsUp App Design Studio" }
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "What is the standard code spacing for deck and stair spindles?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Most international and US residential building codes (IRC) require that a 4-inch (101.6mm) sphere cannot pass between balusters or spindles at any point."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How do you calculate equal spacing between balusters?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Divide the total opening width minus the combined width of all balusters by the total number of balusters plus one to get the exact equal gap dimension."
+              }
+            }
+          ]
+        }
+      ]
     }
     </script>
 </head>
@@ -198,7 +220,59 @@
                 <strong>Third-Party Vendor Disclosures:</strong> This platform utilizes Google AdSense and Google Ad Manager network tags to serve programmatic display ad campaigns to visitors. Google uses cookie sequences to serve tailored marketing configurations based on historical navigation loops across global web environments. Users can update or disable personalized advertising profiles at any time by configuring their primary browser privacy tracking settings or accessing official Google Ad Preference verification accounts directly.
             </p>
         </section>
+        <section class="max-w-4xl mx-auto mt-8 px-4 sm:px-0">
+            <div class="bg-slate-900 border border-slate-800 rounded-xl p-6 shadow-xl text-slate-300">
+                <div class="flex items-center justify-between cursor-pointer" onclick="toggleStairGuide()">
+                <div class="flex items-center space-x-3">
+                    <span class="text-indigo-400 text-xl">📐</span>
+                    <h2 class="text-base sm:text-lg font-bold text-slate-100 font-mono tracking-tight">
+                    How to Calculate Spindle Spacing on Stairs (Rake Angle)
+                    </h2>
+                </div>
+                <span id="guide-arrow" class="text-slate-400 text-xs font-mono uppercase bg-slate-800 px-2.5 py-1 rounded border border-slate-700">
+                    [Expand]
+                </span>
+                </div>
 
+                <!-- Collapsible Content Body -->
+                <div id="stair-guide-content" class="hidden mt-6 pt-6 border-t border-slate-800 space-y-4 text-sm leading-relaxed">
+                
+                <p>
+                    When installing balusters or spindles on an inclined stair railing (the <strong>rake</strong>), the distance measured horizontally between spindles must not exceed the standard <strong>4-inch (101.6mm) sphere rule</strong>.
+                </p>
+
+                <div class="bg-slate-950 p-4 rounded-lg border border-slate-800 font-mono text-xs text-slate-200">
+                    <p class="text-indigo-400 font-bold mb-1">// Mathematical Formula for Sloped Railings</p>
+                    <p>On-Rake Spacing (Along Rail) = Horizontal Gap ÷ cos(Stair Slope Angle)</p>
+                    <p class="text-slate-500 mt-1">Example: A 3.75" horizontal gap on a 34° stair pitch requires a 4.52" measurement along the sloped bottom rail.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
+                    <div class="p-4 bg-slate-800/50 rounded-lg border border-slate-700/50">
+                    <h3 class="font-bold text-slate-200 text-xs font-mono uppercase text-indigo-300 mb-1">
+                        Step 1: Determine Stair Pitch (Slope)
+                    </h3>
+                    <p class="text-xs text-slate-400">
+                        Measure the rise and run of one step. The slope angle ($\theta$) is calculated as: <code>arctan(Rise / Run)</code>. Typical residential stairs range between 32° and 37°.
+                    </p>
+                    </div>
+
+                    <div class="p-4 bg-slate-800/50 rounded-lg border border-slate-700/50">
+                    <h3 class="font-bold text-slate-200 text-xs font-mono uppercase text-indigo-300 mb-1">
+                        Step 2: Transfer Flat Spacing to Rake
+                    </h3>
+                    <p class="text-xs text-slate-400">
+                        Calculate your horizontal spindle centers using the tool above, then divide each segment by <code>cos(pitch)</code> to mark out your bottom rail drilling locations.
+                    </p>
+                    </div>
+                </div>
+
+                <p class="text-xs text-slate-500 pt-2 italic">
+                    Note: The 4-inch sphere code requirement applies horizontally between pickets regardless of slope angle. Always confirm against local IRC/IBC regulations.
+                </p>
+                </div>
+            </div>
+        </section>
     </main>
 
     <!-- FOOTER SYSTEM STATUS LAYER -->
@@ -325,6 +399,19 @@
             // INITIALIZE RUNTIME STATEFUL CAPTURE ON FRAME LOAD
             executeCalculationLoop();
         })();
+        
+        function toggleStairGuide() {
+            const content = document.getElementById('stair-guide-content');
+            const arrow = document.getElementById('guide-arrow');
+            
+            if (content.classList.contains('hidden')) {
+                content.classList.remove('hidden');
+                arrow.textContent = '[Collapse]';
+            } else {
+                content.classList.add('hidden');
+                arrow.textContent = '[Expand]';
+            }
+        }
     </script>
     <script src="/telemetry.js" defer></script>
 </body>
