@@ -95,6 +95,20 @@
         </header>
 
         <!-- GRID INTERFACE CONTROLS -->
+         <!-- Unit Selector Toggle -->
+        <div class="flex items-center justify-between bg-slate-950 p-3 rounded-lg border border-slate-800 mb-6 font-mono text-xs">
+            <span class="text-slate-400 font-bold uppercase tracking-wider">// Unit System:</span>
+            <div class="inline-flex rounded-md shadow-sm" role="group">
+                <button type="button" id="btn-unit-in" onclick="setUnitSystem('in')" 
+                class="px-4 py-1.5 text-xs font-bold rounded-l-md bg-indigo-600 text-white border border-indigo-500 focus:outline-none transition-colors">
+                INCHES (in)
+                </button>
+                <button type="button" id="btn-unit-mm" onclick="setUnitSystem('mm')" 
+                class="px-4 py-1.5 text-xs font-bold rounded-r-md bg-slate-900 text-slate-400 hover:text-white border border-slate-700 focus:outline-none transition-colors">
+                METRIC (mm)
+                </button>
+            </div>
+        </div>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
 
             <!-- INPUT MANAGEMENT ENGINE (FORM ELEMENT) -->
@@ -115,7 +129,15 @@
                     <label class="block text-[11px] uppercase tracking-wider text-slate-400" for="object-count">Target Segment Count</label>
                     <input type="number" step="1" id="object-count" value="15" class="w-full bg-slate-950 border border-slate-800 rounded px-2 py-1.5 text-sm text-amber-400 focus:outline-none focus:border-amber-500 transition-colors">
                 </div>
+                <div class="space-y-1">
+                    <label id="label-total-length" class="block text-[11px] uppercase tracking-wider text-slate-400" for="total-length">Total Run Length (inches)</label>
+                    <input type="number" step="0.001" id="total-length" value="96" class="w-full bg-slate-950 border border-slate-800 rounded px-2 py-1.5 text-sm text-amber-400 focus:outline-none focus:border-amber-500 transition-colors">
+                </div>
 
+                <div class="space-y-1">
+                    <label id="label-object-width" class="block text-[11px] uppercase tracking-wider text-slate-400" for="object-width">Baluster/Object Width (inches)</label>
+                    <input type="number" step="0.001" id="object-width" value="1.5" class="w-full bg-slate-950 border border-slate-800 rounded px-2 py-1.5 text-sm text-amber-400 focus:outline-none focus:border-amber-500 transition-colors">
+                </div>
                 <div class="space-y-1">
                     <label class="block text-[11px] uppercase tracking-wider text-slate-400" for="marking-mode">Marking Edge Logic</label>
                     <select id="marking-mode" class="w-full bg-slate-950 border border-slate-800 rounded px-2 py-1.5 text-sm text-amber-400 focus:outline-none focus:border-amber-500 transition-colors">
@@ -289,117 +311,158 @@
 
     <!-- STABLE CLIENT-SIDE DETERMINISTIC LOGIC SCRIPT ENGINE -->
     <script>
-        (function() {
-            "use strict";
+        "use strict";
 
-            // TARGET INTERFACE CACHE REGISTRY
-            const totalLengthInput = document.getElementById('total-length');
-            const objectWidthInput = document.getElementById('object-width');
-            const objectCountInput = document.getElementById('object-count');
-            const markingModeSelect = document.getElementById('marking-mode');
+        // STATEFUL UNIT SYSTEM STATE
+        let currentUnit = 'in'; // 'in' or 'mm'
 
-            const calculatedGapDisplay = document.getElementById('calculated-gap');
-            const calculatedCountDisplay = document.getElementById('calculated-count');
-            const visualTrackContainer = document.getElementById('visual-track');
-            const ledgerRowsContainer = document.getElementById('ledger-rows');
+        // TARGET INTERFACE CACHE REGISTRY
+        const totalLengthInput = document.getElementById('total-length');
+        const objectWidthInput = document.getElementById('object-width');
+        const objectCountInput = document.getElementById('object-count');
+        const markingModeSelect = document.getElementById('marking-mode');
 
-            /**
-             * EXECUTES PURE MATHEMATICAL SPACING OPERATIONS AND DOM INJECTIONS
-             * CONSTRAINS ASSUMPTIONS, ENSURES RUNS ARE SAFE BY DESIGN
-             */
-            function executeCalculationLoop() {
-                // ASSIGNED COMPONENT VALUE INGESTION & PARSING
-                const totalLength = parseFloat(totalLengthInput.value) || 0;
-                const objectWidth = parseFloat(objectWidthInput.value) || 0;
-                const objectCount = parseInt(objectCountInput.value, 10) || 0;
-                const markingMode = markingModeSelect.value;
+        const calculatedGapDisplay = document.getElementById('calculated-gap');
+        const calculatedCountDisplay = document.getElementById('calculated-count');
+        const visualTrackContainer = document.getElementById('visual-track');
+        const ledgerRowsContainer = document.getElementById('ledger-rows');
 
-                // Reset error styling before re-evaluation
-                calculatedGapDisplay.classList.remove('text-red-400');
-                calculatedGapDisplay.classList.add('text-amber-400');
+        /**
+         * EXECUTES PURE MATHEMATICAL SPACING OPERATIONS AND DOM INJECTIONS
+         */
+        function executeCalculationLoop() {
+            const totalLength = parseFloat(totalLengthInput.value) || 0;
+            const objectWidth = parseFloat(objectWidthInput.value) || 0;
+            const objectCount = parseInt(objectCountInput.value, 10) || 0;
+            const markingMode = markingModeSelect.value;
 
-                // EDGE CONSTRAINT VALIDATION GATES
-                if (totalLength <= 0 || objectCount <= 0 || objectWidth < 0) {
-                    calculatedGapDisplay.textContent = "0.000 in";
-                    calculatedCountDisplay.textContent = "0";
-                    visualTrackContainer.innerHTML = '';
-                    ledgerRowsContainer.innerHTML = '<tr><td colspan="4" class="p-2 text-center text-slate-600">Awaiting operational baseline metrics...</td></tr>';
-                    return;
-                }
+            // Dynamic unit suffix and decimal formatting
+            const unitSuffix = currentUnit === 'mm' ? ' mm' : ' in';
+            const precision = currentUnit === 'mm' ? 1 : 3;
 
-                // ARITHMETIC TRACK MATRIX ISOLATION
-                const netObjectWidthAccumulation = objectCount * objectWidth;
-                const remnantRunLength = totalLength - netObjectWidthAccumulation;
+            // Reset error styling
+            calculatedGapDisplay.classList.remove('text-red-400');
+            calculatedGapDisplay.classList.add('text-amber-400');
 
-                // PREVENT SYSTEM DEVIATION ON NEGATIVE BOUNDS
-                if (remnantRunLength < 0) {
-                    calculatedGapDisplay.textContent = "ERR: SPACE EXCEEDED";
-                    calculatedGapDisplay.classList.remove('text-amber-400');
-                    calculatedGapDisplay.classList.add('text-red-400');
-                    calculatedCountDisplay.textContent = objectCount.toString();
-                    visualTrackContainer.innerHTML = '<div class="w-full text-center text-[10px] text-red-400 font-bold tracking-widest select-none">ERR: SPACE EXCEEDED</div>';
-                    ledgerRowsContainer.innerHTML = '<tr><td colspan="4" class="p-2 text-center text-red-400">ERR: SPACE EXCEEDED — total object width exceeds run length</td></tr>';
-                    return;
-                }
-
-                const singleGapSize = remnantRunLength / (objectCount + 1);
-
-                // UPDATE BASIC REVENUE READOUT FIELDS
-                calculatedGapDisplay.textContent = singleGapSize.toFixed(3) + " in";
-                calculatedCountDisplay.textContent = objectCount.toString();
-
-                // CLEAR VISUAL CANVAS VIEWS PRIOR TO RE-INJECTION (IDEMPOTENT RESET)
+            // EDGE CONSTRAINT VALIDATION GATES
+            if (totalLength <= 0 || objectCount <= 0 || objectWidth < 0) {
+                calculatedGapDisplay.textContent = currentUnit === 'mm' ? "0.0 mm" : "0.000 in";
+                calculatedCountDisplay.textContent = "0";
                 visualTrackContainer.innerHTML = '';
-                ledgerRowsContainer.innerHTML = '';
+                ledgerRowsContainer.innerHTML = '<tr><td colspan="4" class="p-2 text-center text-slate-600">Awaiting operational baseline metrics...</td></tr>';
+                return;
+            }
 
-                let currentPositionTracker = 0;
+            // ARITHMETIC TRACK MATRIX ISOLATION
+            const netObjectWidthAccumulation = objectCount * objectWidth;
+            const remnantRunLength = totalLength - netObjectWidthAccumulation;
 
-                // INGEST LOOP FOR ARRAYS MATRIX CONSTRUCTION
-                for (let i = 1; i <= objectCount; i++) {
-                    // Advance position frame over preceding gap space boundary
-                    currentPositionTracker += singleGapSize;
+            // PREVENT SYSTEM DEVIATION ON NEGATIVE BOUNDS
+            if (remnantRunLength < 0) {
+                calculatedGapDisplay.textContent = "ERR: SPACE EXCEEDED";
+                calculatedGapDisplay.classList.remove('text-amber-400');
+                calculatedGapDisplay.classList.add('text-red-400');
+                calculatedCountDisplay.textContent = objectCount.toString();
+                visualTrackContainer.innerHTML = '<div class="w-full text-center text-[10px] text-red-400 font-bold tracking-widest select-none">ERR: SPACE EXCEEDED</div>';
+                ledgerRowsContainer.innerHTML = '<tr><td colspan="4" class="p-2 text-center text-red-400">ERR: SPACE EXCEEDED — total object width exceeds run length</td></tr>';
+                return;
+            }
 
-                    const objectLeftEdge = currentPositionTracker;
-                    const objectCenterPoint = currentPositionTracker + (objectWidth / 2);
-                    const objectRightEdge = currentPositionTracker + objectWidth;
+            const singleGapSize = remnantRunLength / (objectCount + 1);
 
-                    // CONSTRUCT RELATIONAL LEDGER DATA ROW STRINGS
-                    const tableRow = document.createElement('tr');
-                    tableRow.className = "hover:bg-slate-900/40 border-b border-slate-900 transition-colors";
-                    tableRow.innerHTML = `
-                        <td class="p-2 font-bold text-amber-500">#${i.toString().padStart(2, '0')}</td>
-                        <td class="p-2 font-mono">${objectLeftEdge.toFixed(3)} in</td>
-                        <td class="p-2 font-mono text-slate-400">${objectCenterPoint.toFixed(3)} in</td>
-                        <td class="p-2 font-mono">${objectRightEdge.toFixed(3)} in</td>
-                    `;
-                    ledgerRowsContainer.appendChild(tableRow);
+            // UPDATE KPI GAP READOUT WITH DYNAMIC SUFFIX & PRECISION
+            calculatedGapDisplay.textContent = `${singleGapSize.toFixed(precision)}${unitSuffix}`;
+            calculatedCountDisplay.textContent = objectCount.toString();
 
-                    // CONSTRUCT RESPONSIVE DYNAMIC VISUAL ELEMENT OVERLAYS
-                    const leftPercentPosition = (objectLeftEdge / totalLength) * 100;
-                    const widthPercentScale = (objectWidth / totalLength) * 100;
+            // CLEAR VISUAL CANVAS VIEWS
+            visualTrackContainer.innerHTML = '';
+            ledgerRowsContainer.innerHTML = '';
 
-                    const visualBlock = document.createElement('div');
-                    visualBlock.className = "absolute h-full bg-amber-500/20 border-x border-amber-400 flex items-center justify-center text-[9px] font-bold text-amber-400 select-none transition-all";
-                    visualBlock.style.left = `${leftPercentPosition}%`;
-                    visualBlock.style.width = `${widthPercentScale}%`;
-                    visualBlock.textContent = i.toString();
+            let currentPositionTracker = 0;
 
-                    visualTrackContainer.appendChild(visualBlock);
+            // INGEST LOOP FOR ARRAYS MATRIX CONSTRUCTION
+            for (let i = 1; i <= objectCount; i++) {
+                currentPositionTracker += singleGapSize;
 
-                    // Advance position frame across width of injected object footprint
-                    currentPositionTracker += objectWidth;
+                const objectLeftEdge = currentPositionTracker;
+                const objectCenterPoint = currentPositionTracker + (objectWidth / 2);
+                const objectRightEdge = currentPositionTracker + objectWidth;
+
+                // CONSTRUCT RELATIONAL LEDGER DATA ROW WITH DYNAMIC UNITS
+                const tableRow = document.createElement('tr');
+                tableRow.className = "hover:bg-slate-900/40 border-b border-slate-900 transition-colors";
+                tableRow.innerHTML = `
+                    <td class="p-2 font-bold text-amber-500">#${i.toString().padStart(2, '0')}</td>
+                    <td class="p-2 font-mono">${objectLeftEdge.toFixed(precision)}${unitSuffix}</td>
+                    <td class="p-2 font-mono text-slate-400">${objectCenterPoint.toFixed(precision)}${unitSuffix}</td>
+                    <td class="p-2 font-mono">${objectRightEdge.toFixed(precision)}${unitSuffix}</td>
+                `;
+                ledgerRowsContainer.appendChild(tableRow);
+
+                // CONSTRUCT RESPONSIVE DYNAMIC VISUAL ELEMENT OVERLAYS
+                const leftPercentPosition = (objectLeftEdge / totalLength) * 100;
+                const widthPercentScale = (objectWidth / totalLength) * 100;
+
+                const visualBlock = document.createElement('div');
+                visualBlock.className = "absolute h-full bg-amber-500/20 border-x border-amber-400 flex items-center justify-center text-[9px] font-bold text-amber-400 select-none transition-all";
+                visualBlock.style.left = `${leftPercentPosition}%`;
+                visualBlock.style.width = `${widthPercentScale}%`;
+                visualBlock.textContent = i.toString();
+
+                visualTrackContainer.appendChild(visualBlock);
+
+                currentPositionTracker += objectWidth;
+            }
+        }
+
+        // UNIT SELECTOR HANDLER
+        function setUnitSystem(unit) {
+            if (currentUnit === unit) return;
+            currentUnit = unit;
+
+            const btnIn = document.getElementById('btn-unit-in');
+            const btnMm = document.getElementById('btn-unit-mm');
+            const runLabel = document.getElementById('label-total-length');
+            const widthLabel = document.getElementById('label-object-width');
+
+            if (unit === 'mm') {
+                btnMm.className = "px-4 py-1.5 text-xs font-bold rounded-r-md bg-indigo-600 text-white border border-indigo-500 focus:outline-none transition-colors";
+                btnIn.className = "px-4 py-1.5 text-xs font-bold rounded-l-md bg-slate-900 text-slate-400 hover:text-white border border-slate-700 focus:outline-none transition-colors";
+                
+                if (runLabel) runLabel.textContent = "Total Run Length (mm)";
+                if (widthLabel) widthLabel.textContent = "Baluster/Object Width (mm)";
+                
+                // Convert current input values to millimetres (whole numbers)
+                if (totalLengthInput && totalLengthInput.value) {
+                    totalLengthInput.value = Math.round(parseFloat(totalLengthInput.value) * 25.4);
+                    totalLengthInput.step = "1";
+                }
+                if (objectWidthInput && objectWidthInput.value) {
+                    objectWidthInput.value = Math.round(parseFloat(objectWidthInput.value) * 25.4);
+                    objectWidthInput.step = "1";
+                }
+            } else {
+                btnIn.className = "px-4 py-1.5 text-xs font-bold rounded-l-md bg-indigo-600 text-white border border-indigo-500 focus:outline-none transition-colors";
+                btnMm.className = "px-4 py-1.5 text-xs font-bold rounded-r-md bg-slate-900 text-slate-400 hover:text-white border border-slate-700 focus:outline-none transition-colors";
+                
+                if (runLabel) runLabel.textContent = "Total Run Length (inches)";
+                if (widthLabel) widthLabel.textContent = "Baluster/Object Width (inches)";
+                
+                // Convert current input values back to inches
+                if (totalLengthInput && totalLengthInput.value) {
+                    totalLengthInput.value = (parseFloat(totalLengthInput.value) / 25.4).toFixed(3);
+                    totalLengthInput.step = "0.001";
+                }
+                if (objectWidthInput && objectWidthInput.value) {
+                    objectWidthInput.value = (parseFloat(objectWidthInput.value) / 25.4).toFixed(3);
+                    objectWidthInput.step = "0.001";
                 }
             }
 
-            // ASSIGN EVENT LISTENERS ACCROSS INPUT ARRAY MATRIX
-            [totalLengthInput, objectWidthInput, objectCountInput, markingModeSelect].forEach(element => {
-                element.addEventListener('input', executeCalculationLoop);
-            });
-
-            // INITIALIZE RUNTIME STATEFUL CAPTURE ON FRAME LOAD
             executeCalculationLoop();
-        })();
-        
+        }
+
+        // ACCORDION TOGGLE
         function toggleStairGuide() {
             const content = document.getElementById('stair-guide-content');
             const arrow = document.getElementById('guide-arrow');
@@ -412,7 +475,16 @@
                 arrow.textContent = '[Expand]';
             }
         }
+
+        // EVENT LISTENERS
+        [totalLengthInput, objectWidthInput, objectCountInput, markingModeSelect].forEach(element => {
+            element.addEventListener('input', executeCalculationLoop);
+        });
+
+        // INITIAL EXECUTION ON PAGE LOAD
+        executeCalculationLoop();
     </script>
+
     <script src="/telemetry.js" defer></script>
 </body>
 </html>
